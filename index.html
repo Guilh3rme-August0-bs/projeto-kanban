@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="src/css/kanban.css">
+
+    <title>Kanban</title>
+</head>
+
+<body>
+    <main class="kanban">
+
+        <!-- COLUNA 1 -->
+
+        <div class="kanban-column" data-id="1">
+            <div class="kanban-title">
+                <h2>
+                    Pendente
+                </h2>
+                <button class="add-card">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+
+            <div class="kanban-cards">
+                <div class="kanban-card" draggable="true">
+                    <div class="badge medium">
+                        <span>Prioridade Média</span>
+                    </div>
+
+                    <p class="card-title">Relatório de chamados</p>
+                    <div class="card-infos">
+                        <div class="card-icons">
+                            <p>
+                                <i class="fa-regular fa-comment"></i>
+                                1
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-paperclip"></i>
+                                1
+                            </p>
+                        </div>
+
+                        <div class="user">
+                            <img title="Mike Wazowski"
+                                src="https://i.scdn.co/image/ab67616d00001e02c65997a85c2a3da1e5a8dd3f"
+                                alt="Mike Wazowski">
+                        </div>
+
+                    </div>
+                </div>
+
+            <div class="kanban-cards">
+                <div class="kanban-card" draggable="true">
+                    <div class="badge high">
+                        <span>Alta Prioridade</span>
+                    </div>
+
+                    <p class="card-title">Criação de novas tabelas no banco</p>
+                    <div class="card-infos">
+                        <div class="card-icons">
+                            <p>
+                                <i class="fa-regular fa-comment"></i>
+                                1
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-paperclip"></i>
+                                1
+                            </p>
+                        </div>
+
+                        <div class="user">
+                            <img title="James P. Sullivan"
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyx6T_TnRx2yxXmCc76Eps8EHgmL_yXSyXGg&s"
+                                alt="James P. Sullivan">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </div>
+
+        <!-- COLUNA 2 -->
+
+        <div class="kanban-column" data-id="2">
+            <div class="kanban-title">
+                <h2>
+                    Em desenvolvimento
+                </h2>
+                <button class="add-card">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+
+            <div class="kanban-cards">
+                <div class="kanban-card" draggable="true">
+                    <div class="badge high">
+                        <span>Alta Prioridade</span>
+                    </div>
+
+                    <p class="card-title">Construção de Backend</p>
+                    <div class="card-infos">
+                        <div class="card-icons">
+                            <p>
+                                <i class="fa-regular fa-comment"></i>
+                                1
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-paperclip"></i>
+                                1
+                            </p>
+                        </div>
+
+                        <div class="user">
+                            <img title="James P. Sullivan"
+                                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyx6T_TnRx2yxXmCc76Eps8EHgmL_yXSyXGg&s"
+                                alt="James P. Sullivan">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COLUNA 3 -->
+
+        <div class="kanban-column" data-id="3">
+            <div class="kanban-title">
+                <h2>
+                    Teste de homologação
+                </h2>
+                <button class="add-card">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+
+            <div class="kanban-cards">
+                <div class="kanban-card" draggable="true">
+                    <div class="badge low">
+                        <span>Baixa Prioridade</span>
+                    </div>
+
+                    <p class="card-title">Teste de Usabilidade</p>
+                    <div class="card-infos">
+                        <div class="card-icons">
+                            <p>
+                                <i class="fa-regular fa-comment"></i>
+                                1
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-paperclip"></i>
+                                1
+                            </p>
+                        </div>
+
+                        <div class="user">
+                            <img title="Randall Boggs" src="https://pbs.twimg.com/media/EQ7wV1WWoAcDNtD.jpg"
+                                alt="Randall Boggs">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- COLUNA 4 -->
+
+        <div class="kanban-column" data-id="4">
+            <div class="kanban-title">
+                <h2>
+                    Em produção
+                </h2>
+                <button class="add-card">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+
+            <div class="kanban-cards">
+                <div class="kanban-card" draggable="true">
+                    <div class="badge low">
+                        <span>Baixa Prioridade</span>
+                    </div>
+
+                    <p class="card-title">Reformulação da Interface</p>
+                    <div class="card-infos">
+                        <div class="card-icons">
+                            <p>
+                                <i class="fa-regular fa-comment"></i>
+                                1
+                            </p>
+                            <p>
+                                <i class="fa-solid fa-paperclip"></i>
+                                1
+                            </p>
+                        </div>
+
+                        <div class="user">
+                            <img title="Snowman" src="https://miro.medium.com/v2/0*fVifVS-pbv0I8Niy.jpg" alt="Snowman">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="src/javascript/kanban.js"></script>
+
+</body>
+
+</html>
