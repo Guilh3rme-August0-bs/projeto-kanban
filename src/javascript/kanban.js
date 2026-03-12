@@ -236,8 +236,8 @@ function criarMenu(card, botao) {
     card.appendChild(menu)
 
     // fecha o menu caso o usuário clique fora dele
-    document.addEventListener('click', function fechar(e){
-        if(!menu.contains(e.target) && e.target !== botao){
+    document.addEventListener('click', function fechar(e) {
+        if (!menu.contains(e.target) && e.target !== botao) {
             menu.remove()
             document.removeEventListener('click', fechar)
         }
@@ -246,12 +246,12 @@ function criarMenu(card, botao) {
 
 
 // CONTROLE DO BOTÃO DE OPÇÕES (3 PONTOS)
-document.addEventListener('click', function(e){
+document.addEventListener('click', function (e) {
 
     // verifica se o clique foi no botão de opções
     const botao = e.target.closest('.options')
 
-    if(!botao) return
+    if (!botao) return
 
     // impede que o clique se propague para outros eventos
     e.stopPropagation()
@@ -263,7 +263,7 @@ document.addEventListener('click', function(e){
     const menuExistente = card.querySelector('.card-menu')
 
     // se existir, remove
-    if(menuExistente){
+    if (menuExistente) {
         menuExistente.remove()
         return
     }
@@ -275,12 +275,12 @@ document.addEventListener('click', function(e){
 
 
 // FUNÇÃO PARA EXCLUIR UM CARD
-document.addEventListener('click', function(e) {
+document.addEventListener('click', function (e) {
 
     // verifica se o botão clicado foi o de excluir
     const botaoExcluir = e.target.closest('#li-delete')
 
-    if(!botaoExcluir) return
+    if (!botaoExcluir) return
 
     // encontra o card correspondente
     const card = botaoExcluir.closest('.kanban-card')
@@ -290,6 +290,18 @@ document.addEventListener('click', function(e) {
 
 })
 
+//FUNÇÃO DE ADICIONAR COLUNA
+
+function criarColuna() {
+
+    const buttonDiv = document.querySelector('.add_column_div');
+    const newColumn = document.createElement('div');
+    
+
+    newColumn.classList.add('kanban-column');
+    //document.querySelector('.kanban').appendChild(newColumn)
+    document.querySelector('.kanban').insertBefore(newColumn, buttonDiv)
+}
 
 // ÁREA RESERVADA PARA IMPLEMENTAR EDIÇÃO DE CARD
 // a lógica de editar pode reutilizar o mesmo modal de criação de tarefa
