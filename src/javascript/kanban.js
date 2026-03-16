@@ -1,3 +1,16 @@
+//BUGS PARA CORRIGIR E MEHORIAS: 
+
+/*Ao criar uma nova coluna após colocra um card na ultima coluna criada, 
+esta fica impossibilitada de receber cards, e o card é arrastado para 
+a coluna que não foi criada ainda, fazendo com que ele seja perdido 
+caso as alterações sejam canceladas */
+
+/*A configuração para as colunas receberem cards foi copiada inteira 
+para dentro da função de salvar nova coluna, dá pra melhorar 
+
+--------------------------------*/
+
+
 // APLICA A CLASSE "dragging" QUANDO UM CARD COMEÇA A SER ARRASTADO
 // Isso permite identificar qual card está sendo movido durante o drag and drop
 document.querySelectorAll('.kanban-card').forEach(card => {
@@ -17,35 +30,7 @@ document.querySelectorAll('.kanban-card').forEach(card => {
 
 
 // CONFIGURA OS EVENTOS DAS COLUNAS PARA RECEBER OS CARDS ARRASTADOS
-document.querySelectorAll('.kanban-cards').forEach(column => {
-
-    // EVENTO DISPARADO ENQUANTO UM CARD ESTÁ SOBRE A COLUNA
-    // preventDefault é necessário para permitir o drop
-    column.addEventListener('dragover', e => {
-        e.preventDefault();
-        e.currentTarget.classList.add('cards-hover')
-    })
-
-    // REMOVE O EFEITO VISUAL DE HOVER QUANDO O CARD SAI DA COLUNA
-    column.addEventListener('dragleave', e => {
-        e.preventDefault();
-        e.currentTarget.classList.remove('cards-hover')
-    })
-
-    // EVENTO QUE OCORRE QUANDO O CARD É SOLTO NA COLUNA
-    column.addEventListener('drop', e => {
-
-        // remove o destaque visual
-        e.currentTarget.classList.remove('cards-hover')
-
-        // seleciona o card que está sendo arrastado
-        const dragCard = document.querySelector('.kanban-card.dragging');
-
-        // adiciona o card na nova coluna
-        e.currentTarget.appendChild(dragCard);
-    })
-})
-
+columnFunctions()
 
 // BOTÃO "+" DE CADA COLUNA PARA CRIAR UMA NOVA TAREFA
 document.querySelectorAll('.add-card').forEach(button => button.addEventListener('click', function () {
@@ -292,16 +277,127 @@ document.addEventListener('click', function (e) {
 
 //FUNÇÃO DE ADICIONAR COLUNA
 
+let buttonDiv = document.querySelector('.add_column_div');
+let newColumn = document.createElement('div');
+let newColumnCards = document.createElement('div');
+let newColumnTitle = document.createElement('div');
+let insertName = document.createElement('input');
+let saveButton = document.createElement('button');
+let cancelButton = document.createElement('button');
+let nomeColuna = document.createElement('h2');
+
+
 function criarColuna() {
 
-    const buttonDiv = document.querySelector('.add_column_div');
-    const newColumn = document.createElement('div');
-    
-
     newColumn.classList.add('kanban-column');
-    //document.querySelector('.kanban').appendChild(newColumn)
+    newColumnTitle.classList.add('kanban-title');
+    newColumnCards.classList.add('kanban-cards');
+    insertName.classList.add('kanban-title');
+    saveButton.innerHTML = `<i class="fa-solid fa-check"></i>`;
+    cancelButton.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+
+    const colunasExistentes = document.querySelectorAll('.kanban-column');
+
+    let maxId = 0;
+
+    // Obter o maior id
+    colunasExistentes.forEach(el => {
+        // dataset.id acessa o atributo data-id
+        const currentId = parseInt(el.dataset.id);
+        if (currentId > maxId) {
+            maxId = currentId;
+        }
+    })
+
+    // Somar 1 ao maior id encontrado
+
+    const novoId = maxId + 1;
+
+    //Atribuir novo data-id
+
+    newColumn.dataset.id = novoId;
+
+    //Criar elemento
+
+    document.getElementById('add-column-button').disabled = true;
     document.querySelector('.kanban').insertBefore(newColumn, buttonDiv)
+    newColumn.appendChild(newColumnTitle);
+    newColumn.appendChild(newColumnCards);
+
+    newColumnTitle.style.gap = "6px";
+
+    newColumnTitle.appendChild(insertName);
+    newColumnTitle.appendChild(saveButton);
+    newColumnTitle.appendChild(cancelButton)
 }
+
+//CONFIRMAR NOVA COLUNA
+
+saveButton.addEventListener('click', function () {
+
+    //DAR TITULO À NOVA COLUNA
+
+    newColumnTitle.appendChild(nomeColuna);
+    nomeColuna.innerText = insertName.value;
+
+    insertName.value = ''
+    insertName.remove();
+    saveButton.remove();
+    cancelButton.remove();
+
+    document.getElementById('add-column-button').disabled = false;
+
+    newColumn = document.createElement('div');
+    newColumnTitle = document.createElement('div');
+    newColumnCards.classList.add('kanban-cards');
+    insertName = document.createElement('input');
+    nomeColuna = document.createElement('h2');
+
+    // //ADICIONAR FUNCOES DE DRAG AND DROP NA COLUNA (FUNCAO REPETIDA COPIADA DO INICIO DO CODIGO) 
+
+    columnFunctions()
+
+})
+
+function columnFunctions() {
+    // CONFIGURA OS EVENTOS DAS COLUNAS PARA RECEBER OS CARDS ARRASTADOS
+    document.querySelectorAll('.kanban-cards').forEach(column => {
+
+        // EVENTO DISPARADO ENQUANTO UM CARD ESTÁ SOBRE A COLUNA
+        // preventDefault é necessário para permitir o drop
+        column.addEventListener('dragover', e => {
+            e.preventDefault();
+            e.currentTarget.classList.add('cards-hover')
+        })
+
+        // REMOVE O EFEITO VISUAL DE HOVER QUANDO O CARD SAI DA COLUNA
+        column.addEventListener('dragleave', e => {
+            e.preventDefault();
+            e.currentTarget.classList.remove('cards-hover')
+        })
+
+        // EVENTO QUE OCORRE QUANDO O CARD É SOLTO NA COLUNA
+        column.addEventListener('drop', e => {
+
+            // remove o destaque visual
+            e.currentTarget.classList.remove('cards-hover')
+
+            // seleciona o card que está sendo arrastado
+            const dragCard = document.querySelector('.kanban-card.dragging');
+
+            // adiciona o card na nova coluna
+            e.currentTarget.appendChild(dragCard);
+        })
+    })
+} columnFunctions()
+
+
+//CANCELAR NOVA COLUNA
+
+cancelButton.addEventListener('click', function () {
+    newColumn.remove();
+    document.getElementById('add-column-button').disabled = false;
+})
 
 // ÁREA RESERVADA PARA IMPLEMENTAR EDIÇÃO DE CARD
 // a lógica de editar pode reutilizar o mesmo modal de criação de tarefa
