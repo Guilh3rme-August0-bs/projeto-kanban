@@ -1,6 +1,6 @@
 //BUGS PARA CORRIGIR E MEHORIAS: 
 
-/*Ao criar uma nova coluna após colocra um card na ultima coluna criada, 
+/*Ao criar uma nova coluna após colocar um card na ultima coluna criada, 
 esta fica impossibilitada de receber cards, e o card é arrastado para 
 a coluna que não foi criada ainda, fazendo com que ele seja perdido 
 caso as alterações sejam canceladas */
@@ -278,21 +278,21 @@ document.addEventListener('click', function (e) {
 //FUNÇÃO DE ADICIONAR COLUNA
 
 let buttonDiv = document.querySelector('.add_column_div');
-let newColumn = document.createElement('div');
-let newColumnCards = document.createElement('div');
-let newColumnTitle = document.createElement('div');
-let insertName = document.createElement('input');
 let saveButton = document.createElement('button');
 let cancelButton = document.createElement('button');
-let nomeColuna = document.createElement('h2');
+let insertName = document.createElement('input');
 
 
 function criarColuna() {
 
+    let newColumn = document.createElement('div');
+    let newColumnCards = document.createElement('div');
+    let newColumnTitle = document.createElement('div');
+    let insertName = document.createElement('input');
+
     newColumn.classList.add('kanban-column');
     newColumnTitle.classList.add('kanban-title');
     newColumnCards.classList.add('kanban-cards');
-    insertName.classList.add('kanban-title');
     saveButton.innerHTML = `<i class="fa-solid fa-check"></i>`;
     cancelButton.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
 
@@ -334,26 +334,31 @@ function criarColuna() {
 //CONFIRMAR NOVA COLUNA
 
 saveButton.addEventListener('click', function () {
+    
+    let nomeColuna = document.createElement('h2');
+    let botaoPlus = document.createElement('button');
 
-    //DAR TITULO À NOVA COLUNA
+    //CRIAR CONTEUDO E FUNÇÃO DO BOTAO
 
-    newColumnTitle.appendChild(nomeColuna);
-    nomeColuna.innerText = insertName.value;
+    //LOCALIZAR INPUT
 
-    insertName.value = ''
-    insertName.remove();
+    const column = this.closest('.kanban-column');
+    const input = column.querySelector('input');
+    const columnTitle = column.querySelector('.kanban-title');
+
+    nomeColuna.innerText = input.value;
+    columnTitle.appendChild(nomeColuna);
+
+
+    //DESATIVAR BOTOES E INPUT
+
+    input.remove();
     saveButton.remove();
     cancelButton.remove();
 
     document.getElementById('add-column-button').disabled = false;
 
-    newColumn = document.createElement('div');
-    newColumnTitle = document.createElement('div');
-    newColumnCards.classList.add('kanban-cards');
-    insertName = document.createElement('input');
-    nomeColuna = document.createElement('h2');
-
-    // //ADICIONAR FUNCOES DE DRAG AND DROP NA COLUNA (FUNCAO REPETIDA COPIADA DO INICIO DO CODIGO) 
+    //ADICIONAR FUNCOES DE DRAG AND DROP NA COLUNA
 
     columnFunctions()
 
@@ -395,7 +400,16 @@ function columnFunctions() {
 //CANCELAR NOVA COLUNA
 
 cancelButton.addEventListener('click', function () {
-    newColumn.remove();
+
+    //OBTER ULTIMA COLUNA
+
+    let elementos = Array.from(document.querySelectorAll('.kanban-column'));
+    let ultimaColuna = elementos.pop();
+
+    //REMOVER COLUNA
+
+    ultimaColuna.remove()
+
     document.getElementById('add-column-button').disabled = false;
 })
 
