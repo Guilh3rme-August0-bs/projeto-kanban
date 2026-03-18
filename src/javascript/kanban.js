@@ -33,10 +33,12 @@ document.querySelectorAll('.kanban-card').forEach(card => {
 columnFunctions()
 
 // BOTÃO "+" DE CADA COLUNA PARA CRIAR UMA NOVA TAREFA
-document.querySelectorAll('.add-card').forEach(button => button.addEventListener('click', function () {
 
+document.addEventListener('click', function (e) {
+    const button = e.target.closest('.add-card')
+    if (!button) return
     // identifica em qual coluna o botão foi clicado
-    const column = this.closest('.kanban-column').querySelector('.kanban-cards');
+    const column = button.closest('.kanban-column').querySelector('.kanban-cards')
 
     // abre o modal de criação de tarefa
     modalNovaTarefa(column);
@@ -46,7 +48,8 @@ document.querySelectorAll('.add-card').forEach(button => button.addEventListener
     addCard.classList.add('kanban-card');
     addCard.setAttribute('draggable', 'true');
 
-}))
+})
+
 
 
 // FUNÇÃO RESPONSÁVEL POR CRIAR O MODAL DE NOVA TAREFA
@@ -275,6 +278,7 @@ document.addEventListener('click', function (e) {
 
 })
 
+
 //FUNÇÃO DE ADICIONAR COLUNA
 
 let buttonDiv = document.querySelector('.add_column_div');
@@ -334,11 +338,13 @@ function criarColuna() {
 //CONFIRMAR NOVA COLUNA
 
 saveButton.addEventListener('click', function () {
-    
+
     let nomeColuna = document.createElement('h2');
     let botaoPlus = document.createElement('button');
-
-    //CRIAR CONTEUDO E FUNÇÃO DO BOTAO
+    let botaoEdit = document.createElement('button');
+    let botaoDiv = document.createElement('div');
+    botaoPlus.innerHTML = `<i class="fa-solid fa-plus"></i>`;
+    botaoEdit.innerHTML = `<i class="fa-solid fa-pen-to-square"></i>`;
 
     //LOCALIZAR INPUT
 
@@ -355,6 +361,19 @@ saveButton.addEventListener('click', function () {
     input.remove();
     saveButton.remove();
     cancelButton.remove();
+
+    //HABILITAR ADIÇÃO DE CARDS
+
+    columnTitle.appendChild(botaoDiv);
+    botaoDiv.appendChild(botaoEdit);
+    botaoDiv.appendChild(botaoPlus);
+    
+    botaoDiv.classList.add('column-buttons');
+    botaoEdit.classList.add('edit-column');
+    botaoPlus.classList.add('add-card');
+
+
+    //REABILITAR BOTAO DE CRIAR COLUNA
 
     document.getElementById('add-column-button').disabled = false;
 

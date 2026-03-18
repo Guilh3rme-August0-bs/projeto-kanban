@@ -111,6 +111,7 @@ body {
     background-color: #d57373;
 }
 
+
 /**/
 
 .kanban-title {
@@ -125,7 +126,14 @@ body {
     font-weight: 600;
 }
 
-.add-card {
+.column-buttons {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+/**/
+
+.add-card, .edit-column {
     color: #4b5563;
     font-size: 20px;
     background-color: transparent;
@@ -140,16 +148,20 @@ body {
     border: none;
 }
 
-.options:hover,
-.add-card:hover {
+.fa-solid.fa-ellipsis-vertical:hover,
+.fa-solid.fa-plus:hover,
+.fa-solid.fa-pen-to-square:hover {
     background-color: #8a8a8aaf;
     border-radius: 50%;
     cursor: pointer;
 }
 
-
 .fa-solid.fa-ellipsis-vertical {
     padding: 5px 17px 5px 12px
+}
+
+.fa-solid.fa-pen-to-square {
+    padding: 4px 24px 4px 6px;
 }
 
 .fa-solid.fa-plus {
