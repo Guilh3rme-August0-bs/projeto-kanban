@@ -216,7 +216,7 @@ function criarMenu(card, botao) {
 
     // opções do menu
     menu.innerHTML = `
-        <button class="li-option" id="li-edit"><i class="fa-regular fa-pen-to-square"></i>Editar</button>
+        
         <button class="li-option" id="li-delete"><i class="fa-solid fa-trash"></i>Excluir</button>
     `
 
@@ -352,34 +352,41 @@ saveButton.addEventListener('click', function () {
     const input = column.querySelector('input');
     const columnTitle = column.querySelector('.kanban-title');
 
-    nomeColuna.innerText = input.value;
-    columnTitle.appendChild(nomeColuna);
+    if (input.value == '') {
+        alert('Sem nome')
+
+        return
+    } else {
+
+        nomeColuna.innerText = input.value;
+        columnTitle.appendChild(nomeColuna);
 
 
-    //DESATIVAR BOTOES E INPUT
+        //DESATIVAR BOTOES E INPUT
 
-    input.remove();
-    saveButton.remove();
-    cancelButton.remove();
+        input.remove();
+        saveButton.remove();
+        cancelButton.remove();
 
-    //HABILITAR ADIÇÃO DE CARDS
+        //HABILITAR ADIÇÃO DE CARDS
 
-    columnTitle.appendChild(botaoDiv);
-    botaoDiv.appendChild(botaoEdit);
-    botaoDiv.appendChild(botaoPlus);
-    
-    botaoDiv.classList.add('column-buttons');
-    botaoEdit.classList.add('edit-column');
-    botaoPlus.classList.add('add-card');
+        columnTitle.appendChild(botaoDiv);
+        botaoDiv.appendChild(botaoEdit);
+        botaoDiv.appendChild(botaoPlus);
+
+        botaoDiv.classList.add('column-buttons');
+        botaoEdit.classList.add('edit-column');
+        botaoPlus.classList.add('add-card');
 
 
-    //REABILITAR BOTAO DE CRIAR COLUNA
+        //REABILITAR BOTAO DE CRIAR COLUNA
 
-    document.getElementById('add-column-button').disabled = false;
+        document.getElementById('add-column-button').disabled = false;
 
-    //ADICIONAR FUNCOES DE DRAG AND DROP NA COLUNA
+        //ADICIONAR FUNCOES DE DRAG AND DROP NA COLUNA
 
-    columnFunctions()
+        columnFunctions()
+    }
 
 })
 
